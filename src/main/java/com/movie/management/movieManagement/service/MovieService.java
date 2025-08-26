@@ -5,7 +5,7 @@ import com.movie.management.movieManagement.dto.MovieDto;
 import java.util.List;
 
 public interface MovieService {
-    public void saveMovie(MovieDto movieDto);
+    public String saveMovie(MovieDto movieDto);
 
     public List<MovieDto> getMovies();
 

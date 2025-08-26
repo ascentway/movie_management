@@ -1,6 +1,7 @@
 package com.movie.management.movieManagement.controller;
 
 import com.movie.management.movieManagement.dto.MovieDto;
+import com.movie.management.movieManagement.exception.NoMovieFoundException;
 import com.movie.management.movieManagement.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -21,12 +22,12 @@ public class MovieController {
     @PostMapping("/movies")
     public ResponseEntity<String> saveMovieDetails(@RequestBody MovieDto movieDto){
         System.out.println(movieDto.toString());
-        movieService.saveMovie(movieDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Movie Details Saved Successfully.");
+        String message = movieService.saveMovie(movieDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }
 
     @GetMapping("/movies")
-    public ResponseEntity<List<MovieDto>> getAllMovies(){
+    public ResponseEntity<List<MovieDto>> getAllMovies() throws NoMovieFoundException {
         List<MovieDto> movies = movieService.getMovies();
         return ResponseEntity.status(HttpStatus.FOUND).body(movies);
     }

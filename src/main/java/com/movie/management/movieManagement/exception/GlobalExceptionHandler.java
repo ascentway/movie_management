@@ -20,5 +20,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body,HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(NoMovieFoundException.class)
+    public ResponseEntity<Map<String,Object>>handleNoMovieFoundException(NoMovieFoundException ex){
+        Map<String,Object> body = new HashMap<>();
+        body.put("status",HttpStatus.NOT_FOUND);
+        body.put("error","No movies found.");
+        body.put("message",ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleOtherExceptions(Exception e){
+        return new ResponseEntity<>("An error occurred" + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

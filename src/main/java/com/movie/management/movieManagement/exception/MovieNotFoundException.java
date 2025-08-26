@@ -1,6 +1,6 @@
 package com.movie.management.movieManagement.exception;
 
-public class MovieNotFoundException extends Exception{
+public class MovieNotFoundException extends RuntimeException{
     protected MovieNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
