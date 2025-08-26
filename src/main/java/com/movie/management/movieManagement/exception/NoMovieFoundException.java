@@ -1,6 +1,6 @@
 package com.movie.management.movieManagement.exception;
 
-public class NoMovieFoundException extends RuntimeException{
+public class NoMovieFoundException extends RuntimeException {
     public NoMovieFoundException() {
     }
 
