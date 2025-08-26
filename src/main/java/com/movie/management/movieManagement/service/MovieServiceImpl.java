@@ -19,8 +19,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private final MovieRepository movieRepository;
-    @Autowired
-    ModelMapper modelMapper;
 
     @Override
     public String saveMovie(MovieDto movieDto) {
@@ -48,7 +46,16 @@ public class MovieServiceImpl implements MovieService {
             }
             try {
             List<MovieDto> movieDtos = new ArrayList<>();
-            movieDtos = movies.stream().map(m -> modelMapper.map(m, MovieDto.class)).toList();
+            movieDtos = movies.stream().map(movie -> {
+                MovieDto dto = new MovieDto();
+                dto.setId(movie.getId());
+                dto.setTitle(movie.getTitle());
+                dto.setDirector(movie.getDirector());
+                dto.setReleaseYear(movie.getReleaseYear());
+                dto.setGenre(movie.getGenre());
+                dto.setRating(movie.getRating());
+                return dto;
+            }).toList();
             return movieDtos;
         }catch (Exception e){
             throw new RuntimeException("Failed to Retrieve the data." +e.getMessage());
@@ -61,9 +68,15 @@ public class MovieServiceImpl implements MovieService {
             throw new MovieNotFoundException("No Movie Exists With Given ID.");
         }
         try {
-                Movie movie = movieRepository.findMovieById(id);
-                MovieDto movieDto = modelMapper.map(movie, MovieDto.class);
-                return movieDto;
+            Movie movie = movieRepository.findMovieById(id);
+            MovieDto movieDto = new MovieDto();
+            movieDto.setId(movie.getId());
+            movieDto.setTitle(movie.getTitle());
+            movieDto.setDirector(movie.getDirector());
+            movieDto.setReleaseYear(movie.getReleaseYear());
+            movieDto.setGenre(movie.getGenre());
+            movieDto.setRating(movie.getRating());
+            return movieDto;
         } catch (Exception e){
             throw new RuntimeException("No Movie Exists With Given ID." +e.getMessage());
         }
