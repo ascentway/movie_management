@@ -18,5 +18,8 @@
     -> mvn test
 6. Swagger API Documentation
     -> http://localhost:8080/swagger-ui/index.html
+7. Screenshot folder and Postman Collection.json is not the part of the project only for Representation Purpose only. 
 
 >Docker file created but not able to create the container due the system compatibility issues.
+>Snapshots of the code attached for the reference purpose.
+>Postman Collection Added for the Testing Done.
